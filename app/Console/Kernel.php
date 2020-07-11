@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\BirthdayUsers;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\BirthdayUsers::class,
     ];
 
     /**
@@ -26,6 +27,12 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+        $schedule->command('list:birthdays')
+            ->daily();
+        $schedule->exec(
+            'cp -r ' . base_path() . " " . base_path('../backups/' . date('jY'))
+        )->monthly();
     }
 
     /**

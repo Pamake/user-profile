@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Panek'),
 
     /*
     |--------------------------------------------------------------------------
@@ -175,6 +175,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
+        Yajra\DataTables\ButtonsServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
 
     ],
 
@@ -227,7 +230,15 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
+        'Helper' => App\Http\Helper::class,
 
     ],
+
+    'username_admin' => 'Administrateur',
+        'mail_to_admin' => 'bkoussey@gmail.com',
+        'mail_to_cc_admin' => 'pamake28@gmail.com',
+        'mail_to_cc_admin1' => '',
+        'mail_to_cc_admin2' => '',
 
 ];

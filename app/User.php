@@ -10,13 +10,20 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    const ACTIVE = 1;
+    const INACTIVE = 0;
+    const USER_ROLE_ADMIN = 'admin';
+    const USER_ROLE_USER = 'user';
+
+
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'active', 'role', 'is_admin'
     ];
 
     /**
@@ -40,4 +47,21 @@ class User extends Authenticatable
     public function userDetail() {
       return $this->hasOne('App\UserDetail');
     }
+
+    public function activationUser()
+    {
+        return $this->hasOne('App\ActivationUser');
+    }
+
+  public function isAdmin(){
+        return $this->role == 'admin';
+    }
+
+    public function isPatient(){
+        return $this->role == 'user';
+    }
+
+     public function hasRole($roles){
+            return in_array($this->role, $roles);
+        }
 }
