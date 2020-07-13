@@ -136,7 +136,7 @@ class RegisterController extends Controller
 
 
         //$user->update(['token' => null]);
-        $activationUser->update(['token' => null]);
+        $activationUser->update(['token' => 'null']);
         $activationUser->user->update(['active' => User::ACTIVE]);
 
         return redirect()->route('login')
