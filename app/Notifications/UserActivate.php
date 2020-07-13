@@ -41,11 +41,11 @@ class UserActivate extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Activate Account!')
+            ->subject('Activation du compte par les administrateurs de la plateforme des Anciens de l’INE-ENEAM!')
             ->greeting(sprintf('Hi, %s', $this->user->name))
-            ->line('We just noticed that you created a new account. You will need to activate your account to sign in into this account.')
-            ->action('Activate', route('activate', [$this->user->activationUser->token]))
-            ->line('Thank you for using our application!');
+            ->line('Vous aviez une nouvelle inscription en attente d\'activation. Bien vouloir activer son compte pour pour lui permettre d\'accéder l\'espace des membres.')
+            ->action('Activation', route('activate', [$this->user->activationUser->token]))
+            ->line('Merci d\'utiliser notre Plateforme!');
     }
 
     /**

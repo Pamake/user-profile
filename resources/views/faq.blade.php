@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('back.layout')
 
 @section('css')
 
@@ -20,8 +20,9 @@
 
 @endsection
 
-@section('content')
-
+@section('main')
+<!-- Content Wrapper. Contains page content -->
+  <div class="content">
 <main class=" container-fluid">
 
     @component('components.card')
@@ -49,8 +50,8 @@
 
         <p>Pour remplir le profil, cela signifie au préalable que :</p>
         <ul>
-            <li> vous avez fait l’action de vérification de votre adresse email via le bouton <strong>Vérification
-                    d'adresse email</strong> <img src="{!! asset('images/faq/verification.png') !!}" alt="verification"></li>
+            <li> vous avez fait l\’action de vérification de votre adresse email via le bouton <strong>Vérification
+                    d\'adresse email</strong> <img src="{!! asset('images/faq/verification.png') !!}" alt="verification"></li>
             <li> vous avez reçu le courriel vous confirmant que <strong>Votre compte est maintenant activé. Vous pouvez
                     accéder à vos services.</strong></li>
         </ul>
@@ -99,5 +100,5 @@
     @endcomponent
 
 </main>
-
+ </div>
 @endsection

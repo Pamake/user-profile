@@ -20,6 +20,28 @@ class UserController extends Controller
         return Auth::user();
     }
 
+     public function getAllUserCount ()
+    {
+        $users = DB::table('users')->count();
+        return $users;
+    }
+
+     public function getAllBirthdayByMonthCount ()
+        {
+                $users = DB::table('users')
+                    ->join('user_details', 'users.id', '=', 'user_details.user_id')
+                    ->select( 'users.id', 'user_details.date_of_birth')
+                    ->get();
+                $logs= [];
+                foreach($users as $user){
+                  $date = $user->date_of_birth;
+                  $month = Carbon::parse($date)->format('F');
+                  $logs [] = $month;
+                }
+                $count = array_count_values($logs);
+            return $$count;
+        }
+
     public function viewProfile() {
 
             $user = User::with('userDetail')->findOrFail(Auth::user()->id);
@@ -95,33 +117,7 @@ class UserController extends Controller
                 'country'  => $request->country,
                 'is_sign' => $request->is_sign,
             ];
-           /* $user = User::findOrFail(Auth::user()->id);
-            $user->email = $request->email;
-            $userDetail = new UserDetail();
-            $userDetail->job_title = $request->job_title;
-            $userDetail->profession = $request->profession;
-            $userDetail->first_name = $request->first_name;
-            $userDetail->last_name = $request->last_name;
-            $userDetail->marital_status =$request->marital_status;
-            $userDetail->child_number =$request->child_number;
-            $userDetail->promotion = $request->promotion;
-            $userDetail->filiere = $request->filiere;
-            $userDetail->gender = $request->gender;
-            $userDetail->date_of_birth = $request->date_of_birth;
-            $userDetail->notes = $request->notes;
-            $userDetail->sport = $request->sport;
-            $userDetail->activities = $request->activities;
-            $userDetail->hobbies = $request->hobbies;
-            $userDetail->experiences = $request->experiences;
-            $userDetail->name_skills = $request->name_skills;
-            $userDetail->calling_code = $request->calling_code;
-            $userDetail->phone_number = $request->phone_number;
-            $userDetail->city = $request->city;
-            $userDetail->country = $request->country;
-            $userDetail->is_sign = $request->is_sign;
-           // $userDetail->fill($data);
-            $user->userDetail()->fill($data)->save();
-            $user->save(); */
+
 
             $input_data=$request->all();
                     DB::table('users')->where('id',Auth::user()->id)->update(['email'=>$input_data['email']]);
@@ -241,55 +237,6 @@ class UserController extends Controller
         return redirect()->route('admin.users.index');
     }
 
-   /**public function updateProfileDetail(Request $request)
-    {
-        if (Auth::user()->verified == 'verified') {
-            flash('جهت بروز رسانی اطلاعات از طریق سیستم پشتیبانی و ارسال تیکت اقدام فرمایید.')->warning();
-            return redirect()->route('profile');
-        } else {
-            Validator::make($request->all(), [
-                'email' => 'required|email|unique:users,email,' . Auth::user()->id,
-                'mobile' => 'required|numeric|unique:users,mobile,' . Auth::user()->id,
-                'name' => 'required|string'
-            ])->validate();
-            $user = User::findOrFail(Auth::user()->id);
-            //$user->name = $request->name;
-            $user->email = $request->email;
-            $user->mobile = $request->mobile;
-            $user->save();
-            flash('اطلاعات کاربری با موفقیت ویرایش شد.')->success();
-            return redirect()->route('profile');
-        }
-    }
-
-    public function updateInformation(Request $request)
-    {
-        if (Auth::user()->verified == 'verified') {
-            flash('جهت بروز رسانی اطلاعات از طریق سیستم پشتیبانی و ارسال تیکت اقدام فرمایید.')->warning();
-            return redirect()->route('profile');
-        } else {
-            Validator::make($request->all(), [
-                'national_code' => 'required||numeric|unique:users,national_code,' . Auth::user()->id,
-                'birth_certificate_code' => 'required|numeric',
-                'phone' => 'required|numeric',
-                'zip_code' => 'required|numeric',
-                'address' => 'required|string',
-                'gender' => 'required|string',
-            ])->validate();
-            $user = User::findOrFail(Auth::user()->id);
-            $user->national_code = $request->national_code;
-            $user->birth_certificate_code = $request->birth_certificate_code;
-            $user->zip_code = $request->zip_code;
-            $user->gender = $request->gender;
-            $user->phone = $request->phone;
-            $user->address = $request->address;
-            $user->city_id = $request->city_id;
-            $user->province_id = $request->province_id;
-            $user->save();
-            flash('اطلاعات تکمیلی با موفقیت بروز شد.')->success();
-            return redirect()->route('profile');
-        }
-    } */
 
       public function updateUser(ProfileRequest $request, $id)
         {

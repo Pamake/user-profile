@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="p-3 col-7">
                     <h2 class="lead"><b>{{ $user->userDetail->first_name . ' - ' . $user->userDetail->last_name }}</b></h2>
-                    <p class="text-muted text-sm"><b>Date d'annivesrsaire: </b> {{ $user->userDetail->date_of_birth}} </p>
+                    <p class="text-muted text-sm"><b>Date annivesrsaire: </b> {{ $user->userDetail->date_of_birth}} </p>
                     <p class="text-muted text-sm"><b>Profession: </b> {{ $user->userDetail->profession}} </p>
                     <p class="text-muted text-sm"><b>Experience: </b> {{ $user->userDetail->experience}} </p>
                     <p class="text-muted text-sm"><b>Skills: </b> {{ $user->userDetail->name_skills}} </p>

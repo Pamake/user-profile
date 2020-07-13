@@ -27,7 +27,7 @@
                      with font-awesome or any other icon font library -->
                 @if( Auth::user()->role =='admin')
                 <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link active">
+                    <a href="{{ route('home')}}" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
@@ -50,13 +50,21 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.mailbox')}}" class="nav-link">
+                      <i class="nav-icon far fa-envelope"></i>
+                      <p>
+                        Mailbox
+                      </p>
+                    </a>
+                </li>
                 @endif
                 @auth
                 <li class="nav-item has-treeview menu-open">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('home')}}" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                            Dashboard Users
+                            Tableau utilisateur
                         </p>
                     </a>
                 </li>
@@ -64,7 +72,7 @@
                     <a href="{{ route('admin.user.birthdays.calendar')}}"  class="nav-link">
                         <i class="nav-icon fas fa-calendar-alt"></i>
                         <p>
-                            Calendar
+                            Calendrier
                         </p>
                     </a>
                 </li>
@@ -80,7 +88,7 @@
                     <a href="{{ route('admin.contact')}}"  class="nav-link">
                         <i class="nav-icon fas fa-address-card"></i>
                         <p>
-                            Contacts
+                            Listes des Membres
                         </p>
                     </a>
                 </li>

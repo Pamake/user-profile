@@ -16,7 +16,7 @@ class CustomSearchController extends Controller
 
                 $data = DB::table('users')
                     ->join('user_details', 'users.id', '=', 'user_details.user_id')
-                    ->select('users.name','users.email', 'user_details.first_name', 'user_details.last_name', 'user_details.gender', 'user_details.marital_status', 'user_details.city','user_details.country')
+                    ->select('users.name','users.email', 'user_details.first_name', 'user_details.last_name', 'user_details.gender', 'user_details.filiere', 'user_details.city','user_details.country')
                     ->where('user_details.gender', $request->filter_gender)
                     ->where('user_details.country', $request->filter_country)
                     ->get();
@@ -25,7 +25,7 @@ class CustomSearchController extends Controller
             {
                 $data = DB::table('users')
                     ->join('user_details', 'users.id', '=', 'user_details.user_id')
-                    ->select('users.name','users.email', 'user_details.first_name', 'user_details.last_name', 'user_details.gender', 'user_details.marital_status', 'user_details.city','user_details.country')
+                    ->select('users.name','users.email', 'user_details.first_name', 'user_details.last_name', 'user_details.gender', 'user_details.filiere', 'user_details.city','user_details.country')
                     ->get();
             }
             return datatables()->of($data)->make(true);
@@ -36,7 +36,12 @@ class CustomSearchController extends Controller
             ->groupBy('user_details.country')
             ->orderBy('user_details.country', 'ASC')
             ->get();
+        $filiere_name = DB::table('users')
+                    ->join('user_details', 'users.id', '=', 'user_details.user_id')
+                    ->select('user_details.filiere')
+                    ->distinct()
+                    ->get();
 
-        return view('admin.custom_search', compact('country_name'));
+        return view('admin.custom_search', compact('country_name', 'filiere_name'));
     }
 }

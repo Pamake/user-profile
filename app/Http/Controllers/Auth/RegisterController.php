@@ -87,8 +87,9 @@ class RegisterController extends Controller
          $emailCc = config('app.mail_to_cc_admin');
          $emailTo = config('app.mail_to_admin');
          $username = config('app.username_admin');
-        \Mail::to($emailTo, $username)->cc($emailCc)->send(new VerifyMail($user));
-        $user->notify(new UserActivate($user));
+        \Mail::to($emailTo, $username)->cc($emailCc)->send(new UserActivate($user));
+       // $user->notify(new UserActivate($user));
+        $user->notify(new VerifyMail($user));
 
         return $user;
     }

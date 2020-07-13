@@ -80,13 +80,6 @@ class BirthdayUsers extends Command
             // Finding a random word
 
             foreach ($users_all as $user) {
-                //$user->notify(new NotifyListBirthdayUser($data_birthday_user));
-                /*Mail::raw("$data", function ($mail) use ($user) {
-                    $mail->from('info@panek.com');
-                    $mail->to($user->email)
-                        ->subject('Send a Daily email to all users with birthday list');
-                });*/
-
                 Mail::to($user->email)->send(new ListeBirthdayUserMail($arr));
                 if(env('MAIL_HOST', false) == 'smtp.mailtrap.io'){
                     sleep(1); //use usleep(500000) for half a second or less

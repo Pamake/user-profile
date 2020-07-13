@@ -29,9 +29,9 @@ class VerifyMail extends Mailable
      */
     public function build()
     {
-        $address = 'janeexampexample@example.com';
-        $subject = 'This is a demo!';
-        $name = 'Jane Doe';
+        $address = 'trombi@onjobss.com';
+        $subject = 'Verification de courriel !';
+        $name = 'admin';
 
         return $this->view('emails.verifyUser')
                         ->from($address, $name)

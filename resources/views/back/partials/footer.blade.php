@@ -11,6 +11,6 @@
         </nav>
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2019 <a href="#">Panek Consulting & PKKB Conseil</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2014-2019 <a href="#">Panek Consulting & PKBK Conseil</a>.</strong> All rights reserved.
 
 </footer>

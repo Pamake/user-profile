@@ -67,20 +67,6 @@
                             <li>Date Anniversaire: {{ $date_birthday }}</li>
                         </ul>
                         </p>
-
-                        <ul class="list-group list-group-unbordered mb-3">
-                            <li class="list-group-item">
-                                <b>Followers</b> <a class="float-right">1,322</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Following</b> <a class="float-right">543</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b>Friends</b> <a class="float-right">13,287</a>
-                            </li>
-                        </ul>
-
-                        <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -89,7 +75,7 @@
                 <!-- About Me Box -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">About Me</h3>
+                        <h3 class="card-title">Apropos de Moi</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -107,7 +93,7 @@
 
                         <hr>
 
-                        <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
+                        <strong><i class="fas fa-pencil-alt mr-1"></i> Compétences</strong>
 
                         <p class="text-muted">
                             <span class="tag tag-danger">UI Design</span>
@@ -133,9 +119,8 @@
                     <div class="card-header p-2">
                         <ul class="nav nav-pills">
 
-                            <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Change Profile Picture</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                            <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Gestion image profile</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Information personnelle</a></li>
 
                         </ul>
                     </div><!-- /.card-header -->
@@ -150,7 +135,7 @@
                                     <div class="col-md-8">
                                         <div class="box box-primary" >
                                             <div class="box-header with-border">
-                                                <h3 class="box-title">Change Profile Picture</h3>
+                                                <h3 class="box-title">Gestion image profile</h3>
                                                 <div class="box-tools pull-right">
                                                 </div>
                                             </div>
@@ -239,24 +224,23 @@
                                         <label for="inputName" class="col-sm-2 col-form-label">Promotion</label>
                                         <div class="col-sm-2">
                                             <select id="promotion_id" name="promotion" class="form-control custom-select">
-                                                <option value="{{ $user->userDetail->promotion }}">{{ $user->userDetail->promotion }}</option>
-                                                <option value="2000">2000</option>
-                                                <option value="2001">2001</option>
-                                                <option value="2002">2002</option>
-                                                <option value="2003">2003</option>
+                                            @foreach ($calling_promotions as $promotion => $value)
+                                                <option value="{{ $value['name'] }}"
+                                                    @if (!is_null($user) && $user->userDetail->promotion)
+                                                    {{ $user->userDetail->promotion == $value['name'] ? 'selected' : '' }}
+                                                    @endif>{{ $value['name'] }}</option>
+                                              @endforeach
                                             </select>
                                         </div>
                                         <label for="filiere" class="col-sm-1 col-form-label">filiere</label>
                                         <div class="col-sm-4">
                                             <select id="filiere" name="filiere" class="form-control custom-select">
-                                                <option value="{{ $user->userDetail->filiere }}">{{ $user->userDetail->filiere }}</option>
-                                                <option value="Gestion">Gestion</option>
-                                                <option value="Gestion des Banques">Gestion des Banques </option>
-                                                <option value="Gestion des entreprises">Gestion des entreprises</option>
-                                                <option value="Gestion commerciale">Gestion commerciale</option>
-                                                <option value="Informatique de Gestion">Informatique de Gestion</option>
-                                                <option value="Statistiques">Statistiques</option>
-                                                <option value=" BTS"> BTS</option>
+                                            @foreach ($calling_sectors as $sector => $value)
+                                                <option value="{{ $value['name'] }}"
+                                                    @if (!is_null($user) && $user->userDetail->filiere)
+                                                    {{ $user->userDetail->filiere == $value['name'] ? 'selected' : '' }}
+                                                    @endif>{{ $value['name'] }}</option>
+                                              @endforeach
                                             </select>
                                         </div>
                                         <label for="sexe" class="col-sm-1 col-form-label">Sexe:</label>

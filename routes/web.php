@@ -27,6 +27,9 @@ Route::group(['prefix' => 'admin',
            Route::get('/verifyUser', ['uses' => 'Admin\AdminController@showUserVerifyList', 'as' => 'admin.verifyUsers']);
            Route::get('/verifyUser/{id}','Admin\AdminController@verifyUser');
            Route::get('/rejectUser/{id}','Admin\AdminController@rejectUser');
+           Route::get('mailbox', 'Admin\MailboxController@create')->name('admin.mailbox');;
+           Route::post('mailbox', 'Admin\MailboxController@send');
+           Route::get('mailbox/{user}', 'Admin\MailboxController@userEmail');
     });
 Route::middleware ('auth')->group (function () {
 
@@ -37,6 +40,8 @@ Route::post('/user/{id}/saveProfilePicture', 'Admin\UserController@saveProfilePi
 Route::put('/user/update-profile/{id}','Admin\UserController@updateprofile')->name('admin.update-profile');
 Route::get('/user/contact', 'Admin\UserController@viewContact')->name('admin.contact');
 Route::resource('customsearch', 'CustomSearchController');
+Route::get('/user/birthdays/month', 'HomeController@birthdaysByMonth')->name('admin.user.birthdays.month');
+//Route::get('/user/birthdays/month', 'HomeController@birthdaysByMonth')->name('admin.user.birthdays.month');
 
     });
 

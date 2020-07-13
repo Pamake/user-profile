@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('back.layout')
 @section('css')
 
 <style>
@@ -11,7 +11,9 @@
 </style>
 
 @endsection
-@section('content')
+@section('main')
+<!-- Content Wrapper. Contains page content -->
+  <div class="content">
     <main class=" container-fluid">
         @component('components.card')
 
@@ -162,5 +164,6 @@
 
         @endcomponent
     </main>
+   </div>
 @endsection
 

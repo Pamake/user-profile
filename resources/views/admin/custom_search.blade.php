@@ -27,8 +27,18 @@
                 <option value="{{ $country->country }}">{{ $country->country }}</option>
 
                 @endforeach
-            </select>
+           </select>
         </div>
+        <div class="form-group">
+                <select name="filter_filiere" id="filter_filiere" class="form-control">
+                    <option value="">Selectionner une filiere</option>
+                    @foreach($filiere_name as $filiere)
+
+                    <option value="{{ $filiere->filiere }}">{{ $filiere->filiere }}</option>
+
+                    @endforeach
+               </select>
+         </div>
 
         <div class="form-group" align="center">
             <button type="button" name="filter" id="filter" class="btn btn-info">Filter</button>
@@ -47,6 +57,7 @@
             <th>Nom</th>
             <th>Email</th>
             <th>Gender</th>
+            <th>Filiere</th>
             <th>Ville</th>
             <th>Pays</th>
         </tr>
@@ -95,6 +106,10 @@
                         name:'user_details.gender'
                     },
                     {
+                        data:'filiere',
+                        name:'user_details.filiere'
+                    },
+                    {
                         data:'city',
                         name:'user_details.city'
                     },
@@ -109,11 +124,12 @@
         $('#filter').click(function(){
             var filter_gender = $('#filter_gender').val();
             var filter_country = $('#filter_country').val();
+            var filter_filiere = $('#filter_filiere').val();
 
-            if(filter_gender != '' &&  filter_gender != '')
+            if(filter_gender != '' || filter_gender != '' || filter_filiere != '')
             {
                 $('#customer_data').DataTable().destroy();
-                fill_datatable(filter_gender, filter_country);
+                fill_datatable(filter_gender, filter_country, filter_filiere);
             }
             else
             {
@@ -124,6 +140,7 @@
         $('#reset').click(function(){
             $('#filter_gender').val('');
             $('#filter_country').val('');
+            $('#filter_filiere').val('');
             $('#customer_data').DataTable().destroy();
             fill_datatable();
         });

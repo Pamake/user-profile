@@ -20,6 +20,8 @@ class Controller extends BaseController
     {
 
         view()->share('calling_codes', $this->getCallingCodes());
+        view()->share('calling_sectors', $this->getCallingSectors());
+        view()->share('calling_promotions', $this->getCallingPromotions());
 
     }
 
@@ -33,4 +35,23 @@ class Controller extends BaseController
         };
         return $codes;
     }
+
+
+    public function getCallingSectors()
+    {
+        $sectors = [];
+        foreach(config('calling_sectors.sectors') as $sector) {
+            $sectors = Arr::add($sectors, $sector['code'], array('name' => $sector['name']));
+        };
+        return $sectors;
+    }
+
+    public function getCallingPromotions()
+        {
+            $promotions = [];
+            foreach(config('calling_sectors.promotions') as $promotion) {
+                $promotions = Arr::add($promotions, $promotion['code'], array('name' => $promotion['name']));
+            };
+            return $promotions;
+        }
 }
