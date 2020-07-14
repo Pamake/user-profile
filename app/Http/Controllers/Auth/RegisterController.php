@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\ActivationUser;
+use App\Mail\EmailActivationCode;
 use App\Mail\VerifyMail;
+use App\Mail\WelcomeUserMail;
 use App\Notifications\UserActivate;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -13,6 +15,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
+use App\Jobs\WelcomeUserMailJob;
 
 class RegisterController extends Controller
 {
@@ -69,27 +74,33 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            //'password' => Hash::make($data['password']),
-            'password' => bcrypt($data['password']),
-        ]);
-        $verifyUser = ActivationUser::create([
-            'user_id' => $user->id,
-            'token' => Str::random(40). time(),
-        ]);
-        $userDetail = UserDetail::create([
-            'user_id' => $user->id,
-            'first_name' =>  $data['name'],
-        ]);
+        try {
 
-         $emailCc = config('app.mail_to_cc_admin');
-         $emailTo = config('app.mail_to_admin');
-         $username = config('app.username_admin');
-        \Mail::to($emailTo, $username)->cc($emailCc)->send(new UserActivate($user));
-       // $user->notify(new UserActivate($user));
-        $user->notify(new VerifyMail($user));
+             $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                //'password' => Hash::make($data['password']),
+                'password' => bcrypt($data['password']),
+            ]);
+            $verifyUser = ActivationUser::create([
+                'user_id' => $user->id,
+                'token' => Str::random(40). time(),
+            ]);
+            $userDetail = UserDetail::create([
+                'user_id' => $user->id,
+                'first_name' =>  $data['name'],
+            ]);
+
+            \Mail::to($user->email)->send(new VerifyMail($user));
+             $this->sendActivationCode($user);
+
+        } catch (\Exception $ex) {
+            if ($user) {
+                $user->delete;
+            }
+            throw $ex;
+        }
+
 
         return $user;
     }
@@ -104,7 +115,7 @@ class RegisterController extends Controller
             if(!$user->verified) {
                 $verifyUser->user->is_activated = 1;
                 $verifyUser->user->save();
-                $status = "Votre e-mail est vérifié. Vous pouvez maintenant vous connecter.";
+                $status = "Votre e-mail est vérifié. Vous pouvez maintenant vous connecter apres reception du mail de confirmation activation par les admins..";
             } else {
                 $status = "Votre e-mail est déjà vérifié. Vous pouvez maintenant vous connecter.";
             }
@@ -117,7 +128,7 @@ class RegisterController extends Controller
     protected function registered(Request $request, $user)
     {
         $this->guard()->logout();
-        return redirect('/login')->with('status', 'Nous vous avons envoyé un code d\'activation. Vérifiez votre e-mail et cliquez sur le lien pour le vérifier.');
+        return redirect('/login')->with('status', 'Nous vous avons envoyé un lien . Vérifiez votre e-mail et cliquez sur le lien pour le vérifier.');
     }
 
     /**
@@ -136,9 +147,10 @@ class RegisterController extends Controller
 
 
         //$user->update(['token' => null]);
-        $activationUser->update(['token' => 'null']);
+        //$activationUser->update(['token' => 'null']);
         $activationUser->user->update(['active' => User::ACTIVE]);
 
+        $this->welcomeUser($activationUser->user);
         return redirect()->route('login')
             ->with(['status' => 'Félicitation! votre compte est maitenant activé.']);
     }
@@ -146,13 +158,25 @@ class RegisterController extends Controller
 
       public function sendActivationCode($user)
         {
-            $user_activation = ($user->activationUser==null)? new ActivationUser: $user->activationUser;
+            /*$user_activation = ($user->activationUser==null)? new ActivationUser: $user->activationUser;
             $activation_code = rand(100000, 999999);
             $user_activation->user_id = $user->id;
             $user_activation->token = $activation_code;
-            $user_activation->save();
+            $user_activation->save();*/
 
-          $array=['name' => $user->first_name, 'token' => $activation_code];
-          \Mail::to($user->email)->queue(new VerifyMail($array));
+            $emailCc = config('app.mail_to_cc_admin');
+            $emailTo = config('app.mail_to_admin');
+            $username = config('app.username_admin');
+
+          //$array=['name' => $user->name, 'token' => $user->activationUser->token, 'email' => $user->email];
+          Mail::to($emailTo, $username)->cc($emailCc)->queue(new EmailActivationCode($user));
+         }
+
+         public function welcomeUser($user){
+
+             $mail = (new WelcomeUserMail($user))->delay(Carbon::now()->addSeconds(3));
+             $mail->subject = 'Confirmation activation du compte ' . config('app.name');
+             WelcomeUserMailJob::dispatch($user->email, $mail);
          }
 }
+

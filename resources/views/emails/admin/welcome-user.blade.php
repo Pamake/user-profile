@@ -1,11 +1,11 @@
 @component('mail::message')
-#Dear Student,
-Congratulations, You are successfully admitted to our school.
+#Cher Membre,
+Félicitations, vous êtes admis avec succès dans notre plateforme.
 
-Here are your credentials:<br>
-Email: {{$studentData['studentEmail']}}<br>
-Password: {{$studentData['studentPassword']}}
+Voici vos informations de connexion:<br>
+Email: {{$studentData->email}}<br>
+Password: celui que vous aviez saisie lor de votre inscription
 
-Thanks,<br>
+Merci ,<br>
 {{ config('app.name') }}
 @endcomponent

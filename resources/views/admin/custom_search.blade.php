@@ -1,8 +1,6 @@
 @extends('back.layout')
 @section('css')
 <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
 @endsection
 @section('main')
 
@@ -68,24 +66,26 @@
 </section>
 @endsection
 @section('js')
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"  defer></script>
-<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<!-- Datatable -->
+<script src="{{ asset('adminlte/plugins/datatables-buttons/js/dataTables.buttons.js')}}"></script>
+<script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.flash.js')}}"></script>
+<script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.html5.js')}}"></script>
+<script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.print.js')}}"></script>
 <script>
     $(document).ready(function(){
 
         fill_datatable();
 
-        function fill_datatable(filter_gender = '', filter_country = '')
+        function fill_datatable(filter_gender = '', filter_country = '', filter_filiere = '')
         {
             var dataTable = $('#customer_data').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax:{
                     url: "{{ route('customsearch.index') }}",
-                    data:{filter_gender:filter_gender, filter_country:filter_country}
+                    data:{filter_gender:filter_gender, filter_country:filter_country,filter_filiere:filter_filiere}
 
                 },
                 columns: [
@@ -126,14 +126,14 @@
             var filter_country = $('#filter_country').val();
             var filter_filiere = $('#filter_filiere').val();
 
-            if(filter_gender != '' || filter_gender != '' || filter_filiere != '')
+            if(filter_gender != '' || filter_country != '' || filter_filiere != '')
             {
                 $('#customer_data').DataTable().destroy();
                 fill_datatable(filter_gender, filter_country, filter_filiere);
             }
             else
             {
-                alert('Select Both filter option');
+                alert('Selectionner au moins une option');
             }
         });
 

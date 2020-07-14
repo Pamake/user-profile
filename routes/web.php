@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes(['verify' => true]);
 Route::group(['prefix' => 'admin',
                 'middleware' => ['auth','AdminCheck']], function () {
            Route::get('/users/{id}/detail', 'Admin\UserController@detailProfile')->name('detail');

@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class VerifyMail extends Mailable
+class EmailActivationCode extends Mailable
 {
     use Queueable, SerializesModels;
     public $user;
@@ -29,7 +29,13 @@ class VerifyMail extends Mailable
      */
     public function build()
     {
+        $address = 'trombi@onjobss.com';
+        $subject = 'Activation du compte membres';
+        $name = 'admin';
 
-        return $this->view('emails.verifyUser');
+        return $this->view('emails.activateUser')
+                        ->replyTo($address, $name)
+                        ->subject($subject);
     }
 }
+

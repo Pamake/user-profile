@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+//use App\Notifications\NotifyCustomVerifyEmail;
+//  implements MustVerifyEmail use App\Notifications\CustomVerifyEmailQueued;
 
 class User extends Authenticatable
 {
@@ -64,4 +66,10 @@ class User extends Authenticatable
      public function hasRole($roles){
             return in_array($this->role, $roles);
         }
+
+    /* public function sendEmailVerificationNotification()
+     {
+         //$this->notify(new NotifyCustomVerifyEmail());
+         $this->notify(new CustomVerifyEmailQueued);
+     } */
 }
