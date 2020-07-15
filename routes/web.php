@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes(['verify' => true]);
 Route::group(['prefix' => 'admin',
                 'middleware' => ['auth','AdminCheck']], function () {
-           Route::get('/users/{id}/detail', 'Admin\UserController@detailProfile')->name('detail');
+          // Route::get('/users/{id}/detail', 'Admin\UserController@detailProfile')->name('detail');
            Route::get('/users/destroy/{id}', 'Admin\UserCrudController@destroy')->name('admin.user_destroy');
            Route::get('/users', 'Admin\UserCrudController@index')->middleware('auth')->name('admin.user');
            Route::get('/users-list', 'Admin\UserCrudController@usersList')->name('admin.user-list');
@@ -34,6 +34,7 @@ Route::group(['prefix' => 'admin',
     });
 Route::middleware ('auth')->group (function () {
 
+Route::get('/users/{id}/detail', 'Admin\UserController@detailProfile')->name('detail');
 Route::get('/user/birthdays', 'Admin\UserController@birthdays')->name('admin.user.birthdays');
 Route::get('/user/birthdays/calendar', 'Admin\UserController@index')->name('admin.user.birthdays.calendar');
 Route::get('/profile', 'Admin\UserController@viewProfile')->name('admin.profile');

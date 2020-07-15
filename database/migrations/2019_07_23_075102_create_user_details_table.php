@@ -21,12 +21,12 @@ class CreateUserDetailsTable extends Migration
             $table->string('profession')->nullable();;
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->enum('gender', array('Homme','Femme', 'Autres'))->nullable();;
-            $table->string('phone_number',30)->nullable();;
-            $table->date('date_of_birth')->nullable();;
+            $table->enum('gender', array('Homme','Femme', 'Autres'))->nullable();
+            $table->string('phone_number',30)->nullable();
+            $table->date('date_of_birth')->nullable();
             $table->text('notes')->nullable();
             $table->text('comments')->nullable();
-            $table->string('name_companies_work', 100)->nullable();;
+            $table->string('name_companies_work', 100)->nullable();
             $table->string('name_skills', 100)->nullable();
             $table->string('promotion')->nullable();
             $table->string('filiere')->nullable();

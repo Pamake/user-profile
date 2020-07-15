@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CustomSearchController extends Controller
 {
     function index(Request $request)
     {
+
+    $user = $this->getAuthUser();
         if(request()->ajax())
         {
             if(!empty($request->filter_gender) && !empty($request->filter_country) && !empty($request->filter_filiere) )
@@ -88,6 +91,13 @@ class CustomSearchController extends Controller
                     ->distinct()
                     ->get();
 
-        return view('admin.custom_search', compact('country_name', 'filiere_name'));
+        return view('admin.custom_search', compact('country_name', 'filiere_name', 'user'));
     }
+
+
+    public function getAuthUser ()
+        {
+            return Auth::user();
+        }
+
 }

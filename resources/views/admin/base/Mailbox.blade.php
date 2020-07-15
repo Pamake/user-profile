@@ -10,12 +10,12 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h1>Compose</h1>
+        <h1>Ecrire</h1>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
-          <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">Compose</li>
+          <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+          <li class="breadcrumb-item active">Ecrire</li>
         </ol>
       </div>
     </div>
@@ -36,7 +36,7 @@
           @endif
         <div class="card card-primary card-outline">
           <div class="card-header">
-            <h3 class="card-title">Compose New Message</h3>
+            <h3 class="card-title">Ecrire un nouveau message</h3>
           </div>
           <!-- /.card-header -->
           <div class="card-body">
@@ -83,9 +83,9 @@
             <div class="row">
             <div class="card-footer">
                 <div class="float-right">
-                  <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Send</button>
+                  <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Envoyer</button>
                 </div>
-                <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> Discard</button>
+                <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> Annuler</button>
               </div>
               <!-- /.card-footer -->
             </div>

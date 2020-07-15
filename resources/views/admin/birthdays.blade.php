@@ -24,7 +24,7 @@
 <!-- Main content -->
 <section class="content">
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-12">
             <div class="custom-panel">
                 <div class="custom-panel-heading">birthdays</div>
                 <div id="birthday-calendar"></div>

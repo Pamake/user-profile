@@ -34,7 +34,6 @@ class UserDetail extends Model
                 'notes',
                 'promotion',
                 'filiere',
-                'experience',
                 'name_skills',
                 'comments',
                 'calling_code',

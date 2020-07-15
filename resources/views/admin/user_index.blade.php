@@ -13,12 +13,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>User list</h1>
+                <h1>Listes des Membres</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Accueil</a></li>
-                    <li class="breadcrumb-item active">User-list</li>
+                    <li class="breadcrumb-item active">Listes des Membres</li>
                 </ol>
             </div>
         </div>

@@ -16,7 +16,7 @@
             </div>
             <div class="info">
                 <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-                <small><small><a href="#"><span><i class="fa fa-user-circle-o"></i> Mon compte</span></a> &nbsp;  &nbsp; <a href="/logout"><i class="fa fa-sign-out"></i> <span>Logout</span></a></small></small>
+                <small><small>&nbsp;  &nbsp; <a href="/logout"><i class='fas fa-sign-out-alt' style='font-size:26px'></i></a></small></small>
             </div>
         </div>
 

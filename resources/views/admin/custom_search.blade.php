@@ -73,6 +73,9 @@
 <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.flash.js')}}"></script>
 <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.html5.js')}}"></script>
 <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.print.js')}}"></script>
+<script src="{{ asset('adminlte/plugins/jszip/jszip.js')}}"></script>
+<script src="{{ asset('adminlte/plugins/pdfmake/pdfmake.js')}}"></script>
+<script src="{{ asset('adminlte/plugins/pdfmake/vfs_fonts.js')}}"></script>
 <script>
     $(document).ready(function(){
 
@@ -80,45 +83,53 @@
 
         function fill_datatable(filter_gender = '', filter_country = '', filter_filiere = '')
         {
-            var dataTable = $('#customer_data').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax:{
-                    url: "{{ route('customsearch.index') }}",
-                    data:{filter_gender:filter_gender, filter_country:filter_country,filter_filiere:filter_filiere}
 
-                },
-                columns: [
-                    {
-                        data:'first_name',
-                        name:'user_details.first_name'
-                    },
-                    {
-                        data:'last_name',
-                        name:'user_details.last_name'
-                    },
-                    {
-                        data:'email',
-                        name:'users.email'
-                    },
-                    {
-                        data:'gender',
-                        name:'user_details.gender'
-                    },
-                    {
-                        data:'filiere',
-                        name:'user_details.filiere'
-                    },
-                    {
-                        data:'city',
-                        name:'user_details.city'
-                    },
-                    {
-                        data:'country',
-                        name:'user_details.country'
-                    }
-                ]
-            });
+               var dataTable = $('#customer_data').DataTable({
+
+                            processing: true,
+                            serverSide: true,
+                            ordering: true,
+                             searching:true,
+                             select: true,
+                             ajax:{
+                                    url: "{{ route('customsearch.index') }}",
+                                    data:{filter_gender:filter_gender, filter_country:filter_country,filter_filiere:filter_filiere}
+
+                                },
+                            search: {
+                                caseInsensitive: false,
+                            },
+                            columns: [
+                                {
+                                    data:'first_name',
+                                    name:'user_details.first_name'
+                                },
+                                {
+                                    data:'last_name',
+                                    name:'user_details.last_name'
+                                },
+                                {
+                                    data:'email',
+                                    name:'users.email'
+                                },
+                                {
+                                    data:'gender',
+                                    name:'user_details.gender'
+                                },
+                                {
+                                    data:'filiere',
+                                    name:'user_details.filiere'
+                                },
+                                {
+                                    data:'city',
+                                    name:'user_details.city'
+                                },
+                                {
+                                    data:'country',
+                                    name:'user_details.country'
+                                }
+                            ]
+                        });
         }
 
         $('#filter').click(function(){

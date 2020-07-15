@@ -14,7 +14,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Accueil</a></li>
                     <li class="breadcrumb-item active">Contacts</li>
                 </ol>
             </div>
@@ -31,19 +31,18 @@
             <div class="row d-flex align-items-stretch">
                 @foreach($data as $user)
                         <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
-                    <div class="card bg-light">
-                        <div class="card-header text-muted border-bottom-0">
-                         <h2 class="lead"><b>{{ $user->first_name . ' - ' . $user->last_name }}</b></h2>
-
+                    <div class="card bg-light ">
+                        <div class="card-header  border-bottom-0">
+                         <h2 class="lead"><b>{{ $user->first_name . '  ' . $user->last_name }}</b></h2>
                         </div>
                         <div class="card-body pt-0">
                             <div class="row">
                                 <div class="col-7">
-                                    <h5 class="lead"><b>{{ $user->job_title}}</b></h5>
-                                    <p class="text-muted text-sm"><b>About: </b> {{ $user->profession}} </p>
+                                    <h4 class="lead">{{ $user->job_title}}</h4>
+                                    <p class="text-muted text-sm"><b>Profession : </b> {{ $user->profession}} </p>
                                     <ul class="ml-4 mb-0 fa-ul text-muted">
-                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Address: {{ $user->address}}</li>
-                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: {{ $user->phone_number}}</li>
+                                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-city"></i></span> <b>Ville :</b> {{ $user->city}}</li><br>
+                                         <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> <b>Tél :</b> {{ $user->phone_number}}</li>
                                     </ul>
                                 </div>
                                 <div class="col-5 text-center">

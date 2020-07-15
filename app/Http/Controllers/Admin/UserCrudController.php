@@ -8,6 +8,7 @@ use App\UserCrud;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\Auth;
 
 class UserCrudController extends Controller
 {
@@ -20,7 +21,7 @@ class UserCrudController extends Controller
      */
     public function  index(Request $request)
     {
-
+    $user = $this->getAuthUser();
         if(request()->ajax())
         {
             $users = DB::table('users')
@@ -42,7 +43,12 @@ class UserCrudController extends Controller
                 ->rawColumns(['image','action'])
                 ->make(true);
         }
-        return view('admin.user_index');
+        return view('admin.user_index', compact('user'));
+    }
+
+    public function getAuthUser ()
+    {
+        return Auth::user();
     }
 
     /**

@@ -11,13 +11,15 @@ use Illuminate\Support\Facades\Mail;
 use App\User;
 use PhpParser\Node\Expr\Array_;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class MailboxController extends Controller
 {
 
     public function create()
     {
-        return view('admin.base.Mailbox');
+        $user = $this->getAuthUser();
+        return view('admin.base.Mailbox',compact('user'));
     }
 
     public function send(Request $request)
@@ -62,4 +64,10 @@ class MailboxController extends Controller
     {
         return view('admin.base.Mailbox', compact('user'));
     }
+
+    public function getAuthUser ()
+    {
+        return Auth::user();
+    }
+
 }

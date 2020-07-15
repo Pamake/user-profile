@@ -24,20 +24,20 @@
                     <img src="{{ asset('storage/' . Auth::user()->avatar) }}" class="img-circle elevation-2" alt="User Image">
 
                     <p>
-                        Alexander Pierce - Web Developer
-                        <small>Member since Nov. 2012</small>
+                        {{  Auth::user()->userDetail->first_name.' '.Auth::user()->last_name }}
+                        <small>{{ Auth::user()->userDetail->job_title }}</small>
                     </p>
                 </li>
                 <!-- Menu Footer-->
                 <li class="user-footer">
                     <a href="#" class="btn btn-default btn-flat">Profile</a>
-                    <a href="{{ route('logout') }}" class="btn btn-default btn-flat float-right">Logout</a>
+                    <a href="{{ route('logout') }}" class="btn btn-default btn-flat float-right"><i class='fas fa-sign-out-alt' style='font-size:26px'></i></a>
                 </li>
             </ul>
         </li>
 
         <li class="nav-item"><a  class="nav-link" href="{{ route('logout') }}"  onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i class="fas fa-sign-out"></i> Logout</a><form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                       document.getElementById('logout-form').submit();"><i class='fas fa-sign-out-alt' style='font-size:30px'></i></a><form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
         </li>

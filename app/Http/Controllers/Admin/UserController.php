@@ -47,8 +47,9 @@ class UserController extends Controller
             $user = User::with('userDetail')->findOrFail(Auth::user()->id);
             $date = Carbon::createFromFormat('Y-m-d', $user->userDetail->date_of_birth,'Europe/Paris')->locale('fr_FR');
             $dateDisplay = $date->isoFormat('D MMMM');
+           // dd($user);
       $data = [
-        'user' => Auth::user(),
+        'user' => $user,
         'date_birthday' => $dateDisplay
       ];
       return view('admin.user.profile', $data);
@@ -77,16 +78,16 @@ class UserController extends Controller
                 'filiere' => 'required',
                 'gender' =>'required',
                 'date_of_birth'  => 'required|date',
-                'notes'  => 'max:200',
+                'notes'  => 'max:250',
                 'sport'  => 'max:50',
-                'activities'  => 'max:30',
+                'activities'  => 'max:50',
                 'hobbies'  => 'max:50',
-                'experiences' => 'required|max:75',
-                'name_skills' => "required|max:75",
+                'experiences' => 'required|max:250',
+                'name_skills' => "required|max:100",
                 'calling_code' => 'required',
                 'phone_number' => 'required',
                 'city'  => 'max:50',
-                'country'  => 'max:50',
+                'country'  => 'max:60',
                 'is_sign' => 'required',
 
             ],
@@ -100,7 +101,6 @@ class UserController extends Controller
                 'last_name'  => $request->last_name,
                 'marital_status' => $request->marital_status,
                 'child_number' =>$request->child_number,
-                'email' => $request->email,
                 'promotion' => $request->promotion,
                 'filiere' => $request->filiere,
                 'gender' =>$request->gender,
@@ -118,30 +118,15 @@ class UserController extends Controller
                 'is_sign' => $request->is_sign,
             ];
 
+              $data1 = [
 
-            $input_data=$request->all();
-                    DB::table('users')->where('id',Auth::user()->id)->update(['email'=>$input_data['email']]);
-                    DB::table('user_details')->where('user_id',Auth::user()->id)->update(['job_title'=>$input_data['job_title'],
-                        'profession'=>$input_data['profession'],
-                        'first_name'=>$input_data['first_name'],
-                        'last_name'=>$input_data['last_name'],
-                        'marital_status'=>$input_data['marital_status'],
-                        'child_number'=>$input_data['child_number'],
-                        'promotion'=>$input_data['promotion'],
-                        'filiere'=>$input_data['filiere'],
-                        'gender'=>$input_data['gender'],
-                        'date_of_birth'=>$input_data['date_of_birth'],
-                        'notes'=>$input_data['notes'],
-                        'sport'=>$input_data['sport'],
-                        'activities'=>$input_data['activities'],
-                        'hobbies'=>$input_data['hobbies'],
-                        'experiences'=>$input_data['experiences'],
-                        'name_skills'=>$input_data['name_skills'],
-                        'calling_code'=>$input_data['calling_code'],
-                        'phone_number'=>$input_data['phone_number'],
-                        'city'=>$input_data['city'],
-                        'country'=>$input_data['country'],
-                        'is_sign'=>$input_data['is_sign']]);
+                            'email' => $request->email,
+                            'name' => $request->first_name,
+                        ];
+            $model = User::findOrFail(Auth::user()->id);
+            $model->userDetail->fill($data)->save();
+            $model->fill($data1)->save();
+
             return redirect()->route('admin.profile')->with(['message' => 'Profile updated successfully']);
         }else{
             return redirect()->route('admin.profile')->with(['error' => 'Profile updated error']);
