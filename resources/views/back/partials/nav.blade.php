@@ -30,14 +30,14 @@
                 </li>
                 <!-- Menu Footer-->
                 <li class="user-footer">
-                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                    <a href="{{ route('password.request') }}" class="btn btn-default btn-flat">Changement mot de passe</a>
                     <a href="{{ route('logout') }}" class="btn btn-default btn-flat float-right"><i class='fas fa-sign-out-alt' style='font-size:26px'></i></a>
                 </li>
             </ul>
         </li>
 
         <li class="nav-item"><a  class="nav-link" href="{{ route('logout') }}"  onclick="event.preventDefault();
-                       document.getElementById('logout-form').submit();"><i class='fas fa-sign-out-alt' style='font-size:30px'></i></a><form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                       document.getElementById('logout-form').submit();"><i class='fas fa-sign-out-alt' style='font-size:20px'></i> <b>Déconnexion</b></a><form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 @csrf
             </form>
         </li>

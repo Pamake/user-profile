@@ -24,6 +24,7 @@ class MailboxController extends Controller
 
     public function send(Request $request)
     {
+
         request()->validate([
             'category' => 'required',
             'message' => 'required'
@@ -44,11 +45,14 @@ class MailboxController extends Controller
             $emails [] = $request->email;
         }
 
+
         if (!empty($emails)) {
             $message = request()->message;
             foreach ($emails as $email) {
                 $mail = (new MailboxMail($message))->delay(Carbon::now()->addSeconds(3));
+
                 $mail->subject = ($request->subject) ? $request->subject : 'Important Notice from ' . config('app.name');
+
                 MailboxMailJob::dispatch($email, $mail);
 //                sleep(1);
             }

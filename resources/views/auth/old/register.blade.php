@@ -9,8 +9,10 @@
 @section('content')
 <div class="register-box">
   <div class="register-logo">
-      <img src="{{ asset('adminlte/img/panekv5360x83.png')}}" alt="Panek Logo" class="img"
+  <img src="{{ asset('adminlte/img/logoPanek.png')}}" alt="AdminLTE Logo" class="img-circle elevation-2"
            style="opacity: .8">
+    <a href="#">
+             <b>PANEK</b>SOLUTION</a>
   </div>
 
   <div class="card">
@@ -75,7 +77,6 @@
               <span class="fas fa-lock"></span>
             </div>
           </div>
-            <small >* le mot de passe saisi doit avoir au moins 8 caractéres.</small>
           @error('password')
              <span class="invalid-feedback" role="alert">
                  <strong>{{ $message }}</strong>
@@ -98,16 +99,9 @@
           <!-- /.col -->
         </div>
       </form>
-        <div class="social-auth-links text-center mb-3">
-            <p><small>Deja un compte?</small></p>
-            <a href="{{ route('login') }}" class="btn btn-block btn-secondary">
-                <i class="fa fa-sign-in-alt" aria-hidden="true"></i> Connexion
-            </a>
-            <p>- OR -</p>
-            <a  href="{{ route('welcome') }}" class="btn btn-block btn-warning">
-                <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back to Home
-            </a>
-        </div>
+
+
+      <a href="{{ route('login') }}" class="text-center">Se connecter</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

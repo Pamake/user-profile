@@ -11,28 +11,14 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
-        @if (session('message'))
-        <div class="alert alert-success">
-            {{ session('message') }}
-        </div>
-        @endif
-        @if (session('warning'))
-        <div class="alert alert-warning">
-            {{ session('warning') }}
-        </div>
-        @endif
-        @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-        @endif
+
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1>Profile de {{$user->name}} </h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('home')}}" >Accueil</a></li>
                     <li class="breadcrumb-item active">{{$user->name}} Profile</li>
                 </ol>
             </div>
@@ -43,6 +29,24 @@
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">
+        @if (session('message'))
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{ session('message') }}
+        </div>
+        @endif
+        @if (session('warning'))
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{ session('warning') }}
+        </div>
+        @endif
+        @if (session('error'))
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            {{ session('error') }}
+        </div>
+        @endif
         <div class="row">
             <div class="col-md-4">
                 <!-- Profile Image -->
@@ -84,7 +88,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <strong><i class="fas fa-book mr-1"></i> Experiences</strong>
+                        <strong><i class="fas fa-book mr-1"></i> Expérience</strong>
 
                         <p class="text-muted">
                             {{ $user->userDetail->experiences }}
@@ -112,7 +116,7 @@
 
                         <hr>
 
-                        <strong><i class="far fa-file-alt mr-1"></i> Activites</strong>
+                        <strong><i class="far fa-file-alt mr-1"></i> Activités</strong>
                             <p class="text-muted text-sm"><b>Sport : </b> {{ $user->userDetail->sport}} </p>
                             <p class="text-muted text-sm"><b>Loisir : </b> {{ $user->userDetail->hobbies}} </p>
                             <p class="text-muted text-sm"><b>Extra : </b> {{ $user->userDetail->activities}} </p>
@@ -321,11 +325,11 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="input-group {{$errors->has('calling_code')?'has-error':''}}">
+                                            <div class="input-group {{$errors->has('phone_number')?'has-error':''}}">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                                 </div>
-                                                <input type="tel" class="form-control" id="phone_number" pattern="^\d{3}.\d{3}.\d{4}$"  name="phone_number" placeholder="xxx-xxx-xxxx" value="{{ old( 'phone_number', $user->userDetail->phone_number) }}">
+                                                <input type="tel" class="form-control" id="phone_number"  pattern='^\+?\d{0,13}'  name="phone_number" placeholder="votre numero de telephone" value="{{ old( 'phone_number', $user->userDetail->phone_number) }}">
                                                 <span class="text-danger">{{$errors->first('phone_number')}}</span>
                                             </div>
                                         </div>

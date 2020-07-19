@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\BirthdayUsers::class,
+        Commands\WordOfTheDay::class,
     ];
 
     /**
@@ -28,8 +29,10 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')
         //          ->hourly();
 
-        $schedule->command('list:birthdays')
-            ->daily();
+        //$schedule->command('word:day')->daily();
+        //$schedule->command('word:day')->everyMinute();
+
+        $schedule->command('list:birthdays')->daily();
         $schedule->exec(
             'cp -r ' . base_path() . " " . base_path('../backups/' . date('jY'))
         )->monthly();

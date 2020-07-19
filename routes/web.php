@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Auth::routes();
 
@@ -23,7 +23,6 @@ Route::group(['prefix' => 'admin',
                 'middleware' => ['auth','AdminCheck']], function () {
           // Route::get('/users/{id}/detail', 'Admin\UserController@detailProfile')->name('detail');
            Route::get('/users/destroy/{id}', 'Admin\UserCrudController@destroy')->name('admin.user_destroy');
-           Route::get('/users', 'Admin\UserCrudController@index')->middleware('auth')->name('admin.user');
            Route::get('/users-list', 'Admin\UserCrudController@usersList')->name('admin.user-list');
            Route::get('/verifyUser', ['uses' => 'Admin\AdminController@showUserVerifyList', 'as' => 'admin.verifyUsers']);
            Route::get('/verifyUser/{id}','Admin\AdminController@verifyUser');
@@ -33,7 +32,7 @@ Route::group(['prefix' => 'admin',
            Route::get('mailbox/{user}', 'Admin\MailboxController@userEmail');
     });
 Route::middleware ('auth')->group (function () {
-
+    Route::get('/users', 'Admin\UserCrudController@index')->name('admin.user');
 Route::get('/users/{id}/detail', 'Admin\UserController@detailProfile')->name('detail');
 Route::get('/user/birthdays', 'Admin\UserController@birthdays')->name('admin.user.birthdays');
 Route::get('/user/birthdays/calendar', 'Admin\UserController@index')->name('admin.user.birthdays.calendar');

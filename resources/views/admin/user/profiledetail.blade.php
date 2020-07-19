@@ -9,7 +9,7 @@
                     <h2 class="lead"><b>{{ $user->userDetail->job_title}}</b></h2>
                     <p class="text-muted text-sm"><b>Date annivesrsaire : </b> {{ $user->userDetail->date_of_birth}} </p>
                     <p class="text-muted text-sm"><b>Profession : </b> {{ $user->userDetail->profession}} </p>
-                    <p class="text-muted text-sm"><b>Experience : </b> {{ $user->userDetail->experience}} </p>
+                    <p class="text-muted text-sm"><b>Expérience : </b> {{ $user->userDetail->experience}} </p>
                     <p class="text-muted text-sm"><b>Compétences : </b> {{ $user->userDetail->name_skills}} </p>
                     <p class="text-muted text-sm"><b>Status Marital : </b> {{ $user->userDetail->marital_status}} </p>
                     <p class="text-muted text-sm"><b>Enfants : </b> {{ $user->userDetail->child_number}} </p>

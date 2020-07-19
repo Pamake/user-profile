@@ -20,10 +20,8 @@
         </div>
         @endif
       <div class="login-logo">
-      <img src="{{ asset('adminlte/img/logoPanek.png')}}" alt="AdminLTE Logo" class="img-circle elevation-2"
+      <img src="{{ asset('adminlte/img/panekv5360x83.png')}}" alt="Panek Logo" class="img"
                  style="opacity: .8">
-        <a href="#">
-             <b>PANEK</b>SOLUTION</a>
       </div>
       <!-- /.login-logo -->
       <div class="card">
@@ -69,24 +67,32 @@
               </div>
               <!-- /.col -->
               <div class="col-5">
-                <button type="submit" class="btn btn-primary btn-block">Connexion</button>
+                <button type="submit" class="btn btn-primary block full-width m-b">Connexion</button>
               </div>
               <!-- /.col -->
             </div>
           </form>
+            <div class="social-auth-links text-center mb-3">
+                <p><small>Pas de compte?</small></p>
+                <a href="{{ route('register') }}" class="btn btn-block btn-secondary">
+                    <i class="fa fa-user-plus" aria-hidden="true"></i> Inscription
+                </a>
+                <p>- OR -</p>
+                <a  href="{{ route('welcome') }}" class="btn btn-block btn-warning">
+                    <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Back to Home
+                </a>
+            </div>
+            <!-- /.social-auth-links -->
 
-          <p class="mb-1">
-           @if (Route::has('password.request'))
-              <a class="text-center" href="{{ route('password.request') }}">
-                   Mot de passe oublié ?
-              </a>
-          @endif
-          </p>
-          <p class="mb-0">
-            <a href="{{ route('register') }}" class="text-center">Inscription</a>
-          </p>
+            <p class="mb-1">
+                @if (Route::has('password.request'))
+                <a class="text-center" href="{{ route('password.request') }}">
+                    <small> Mot de passe oublié ?</small>
+                </a>
+                @endif
+            </p>
         </div>
-        <!-- /.login-card-body -->
+
       </div>
     </div>
     <!-- /.login-box -->

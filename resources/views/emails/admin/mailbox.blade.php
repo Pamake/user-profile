@@ -1,7 +1,7 @@
 @component('mail::message')
-#Dear User,
+#Cher Membre,
 
-{{$message}}
+{!! $message !!}
 
 Thanks,<br>
 {{ config('app.name') }}

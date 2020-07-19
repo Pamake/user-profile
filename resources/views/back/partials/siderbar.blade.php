@@ -1,10 +1,9 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-        <img src="{{ asset('adminlte/img/logoPanek.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+    <a href="#" class="brand-link">
+        <img src="{{ asset('adminlte/img/panekv5360x83.png')}}" alt="Panek Logo" class="img"
              style="opacity: .8">
-        <span class="brand-text font-weight-light">Panek Solutions</span>
     </a>
 
     <!-- Sidebar -->
@@ -31,14 +30,6 @@
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
                             Dashboard
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item has-treeview">
-                    <a href="{{ route('admin.user')}}" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>
-                            Users
                         </p>
                     </a>
                 </li>
@@ -89,6 +80,14 @@
                         <i class="nav-icon fas fa-address-card"></i>
                         <p>
                             Listes des Membres
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="{{ route('admin.user')}}" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Users
                         </p>
                     </a>
                 </li>

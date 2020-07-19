@@ -40,6 +40,7 @@ class UserDetail extends Model
                 'phone_number',
                 'name_companies_work',
                 'is_sign',
+                'gender',
                 'experiences'
     ];
 

@@ -17,7 +17,7 @@
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('home')}}" >Accueil</a></li>
                     <li class="breadcrumb-item active">Listes des Membres</li>
                 </ol>
             </div>
@@ -59,10 +59,11 @@
 <script type="text/javascript">
     $(document).ready( function () {
         $('#user_datatable').DataTable({
-            dom: 'Bfrtip',
+            dom: 'lBfrtip',
             buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
+                'copy', 'csv', 'excel', 'pdf', 'print',
             ],
+            "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
             processing: true,
             serverSide: true,
             ajax: "{{ route('admin.user') }}",

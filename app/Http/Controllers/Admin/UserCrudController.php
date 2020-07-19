@@ -33,11 +33,15 @@ class UserCrudController extends Controller
                     $url=asset('storage/'.$user->avatar);
                     return '<img src="'.$url.'" border="0" width="40" class="img-rounded" align="center" />';
                 })->addColumn('action', function($data){
-                   /* $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-info btn-sm" href="#"><i class="fas fa-pencil-alt"></i>Edit</button>';*/
-                    $button = '<button type="button" name="view" id="'.$data->id.'" class="view btn btn-primary btn-sm" href="' . route('detail', $data->id) . '"><i class="fas fa-folder"></i>View</button>';
-                    $button .= '&nbsp;&nbsp;';
-                    $button .= '<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm" href="#"><i class="fas fa-trash"></i>Delete</button>';
-                    $button .= '&nbsp;&nbsp;';
+
+                        /* $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-info btn-sm" href="#"><i class="fas fa-pencil-alt"></i>Edit</button>';*/
+                        $button = '<button type="button" name="view" id="'.$data->id.'" class="view btn btn-primary btn-sm" href="' . route('detail', $data->id) . '"><i class="fas fa-folder"></i>View</button>';
+                    if (Auth::check() && (Auth::user()->role == 'admin')){
+                        $button .= '&nbsp;&nbsp;';
+                        $button .= '<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm" href="#"><i class="fas fa-trash"></i>Delete</button>';
+                        $button .= '&nbsp;&nbsp;';
+
+                    }
                     return $button;
                 })
                 ->rawColumns(['image','action'])

@@ -1,6 +1,6 @@
 @extends('back.layout')
 @section('css')
-<link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
 @endsection
 @section('main')
 
@@ -67,7 +67,7 @@
 @endsection
 @section('js')
 
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <!-- Datatable -->
 <script src="{{ asset('adminlte/plugins/datatables-buttons/js/dataTables.buttons.js')}}"></script>
 <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.flash.js')}}"></script>
@@ -93,13 +93,18 @@
                              select: true,
                              ajax:{
                                     url: "{{ route('customsearch.index') }}",
-                                    data:{filter_gender:filter_gender, filter_country:filter_country,filter_filiere:filter_filiere}
+                                    data:{
+                                        filter_gender:filter_gender,
+                                        filter_country:filter_country,
+                                        filter_filiere:filter_filiere,
+                                    }
 
                                 },
                             search: {
                                 caseInsensitive: false,
                             },
                             columns: [
+
                                 {
                                     data:'first_name',
                                     name:'user_details.first_name'

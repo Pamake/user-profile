@@ -127,9 +127,9 @@ class UserController extends Controller
             $model->userDetail->fill($data)->save();
             $model->fill($data1)->save();
 
-            return redirect()->route('admin.profile')->with(['message' => 'Profile updated successfully']);
+            return redirect()->route('admin.profile')->with(['message' => 'Votre profile a été mise à jour avec succés.']);
         }else{
-            return redirect()->route('admin.profile')->with(['error' => 'Profile updated error']);
+            return redirect()->route('admin.profile')->with(['error' => 'Votre profile a pas été mise à jour.']);
         }
 
 
